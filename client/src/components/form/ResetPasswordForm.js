@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { Form, Button, Message } from 'semantic-ui-react';
-import Validator from 'validator';
-export default class LoginForm extends Component {
+
+export default class ResetPasswordForm extends Component {
   state = {
     data: {
-      email: '',
-      password: ''
+      token: this.props.token,
+      password: '',
+      passwordConfirmation: ''
     },
-    loading: false,
-    errors: {}
+    loading:false,
+    errors:{}
   };
   /**
    * on change event
@@ -39,9 +40,8 @@ export default class LoginForm extends Component {
    */
   validate = (data) => {
     let errors = {};
-    if (!Validator.isEmail(data.email)) errors.email = 'invalid email';
-    if (!data.email) errors.email = "can't be empty";
     if (!data.password) errors.password = "can't be empty";
+    if (data.password !== data.passwordConfirmation) errors.password = "the password must same";
     return errors;
   };
   render() {
@@ -54,33 +54,33 @@ export default class LoginForm extends Component {
             <p>{errors.global}</p>
           </Message>
         )}
-        <Form.Field error={!!errors.email}>
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder={
-              !!errors.email === true ? errors.email : 'example@example.com'
-            }
-            value={data.email}
-            onChange={this.onChange}
-          />
-        </Form.Field>
         <Form.Field error={!!errors.password}>
-          <label htmlFor="password">Password</label>
+          <label htmlFor="email">New Password</label>
           <input
             type="password"
             id="password"
             name="password"
             placeholder={
-              !!errors.password === true ? errors.password : '*******'
+              !!errors.password === true ? errors.password : 'your new password'
             }
             value={data.password}
             onChange={this.onChange}
           />
         </Form.Field>
-        <Button primary>Login</Button>
+        <Form.Field error={!!errors.password}>
+          <label htmlFor="email">Confirm Your Password</label>
+          <input
+            type="password"
+            id="passwordConfirmation"
+            name="passwordConfirmation"
+            placeholder={
+              !!errors.password === true ? errors.password : 'type it again'
+            }
+            value={data.passwordConfirmation}
+            onChange={this.onChange}
+          />
+        </Form.Field>
+        <Button primary>Reset</Button>
       </Form>
     );
   }

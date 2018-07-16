@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { Form, Button, Message } from 'semantic-ui-react';
 import Validator from 'validator';
-export default class LoginForm extends Component {
+export default class ForgotPasswordForm extends Component {
   state = {
     data: {
-      email: '',
-      password: ''
+      email: ''
     },
     loading: false,
     errors: {}
@@ -41,7 +40,6 @@ export default class LoginForm extends Component {
     let errors = {};
     if (!Validator.isEmail(data.email)) errors.email = 'invalid email';
     if (!data.email) errors.email = "can't be empty";
-    if (!data.password) errors.password = "can't be empty";
     return errors;
   };
   render() {
@@ -67,20 +65,7 @@ export default class LoginForm extends Component {
             onChange={this.onChange}
           />
         </Form.Field>
-        <Form.Field error={!!errors.password}>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder={
-              !!errors.password === true ? errors.password : '*******'
-            }
-            value={data.password}
-            onChange={this.onChange}
-          />
-        </Form.Field>
-        <Button primary>Login</Button>
+        <Button primary>Forgot Password</Button>
       </Form>
     );
   }

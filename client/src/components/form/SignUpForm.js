@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Button, Message } from 'semantic-ui-react';
 import Validator from 'validator';
-export default class LoginForm extends Component {
+export default class SignUpForm extends Component {
   state = {
     data: {
       email: '',
@@ -26,11 +26,9 @@ export default class LoginForm extends Component {
     if (Object.keys(errors).length === 0) {
       this.setState({ loading: true });
       this.props.submit(this.state.data).catch((err) => {
-        err
-          .json()
-          .then((value) =>
-            this.setState({ errors: value.errors, loading: false })
-          );
+        err.json().then((result) => {
+          this.setState({ errors: result.err.errors.email, loading: false });
+        });
       });
     }
   };
@@ -48,10 +46,10 @@ export default class LoginForm extends Component {
     const { data, errors, loading } = this.state;
     return (
       <Form onSubmit={this.onSubmit} loading={loading}>
-        {errors.global && (
+        {errors.message && (
           <Message negative>
             <Message.Header>Something go wrong</Message.Header>
-            <p>{errors.global}</p>
+            <p>{errors.message}</p>
           </Message>
         )}
         <Form.Field error={!!errors.email}>

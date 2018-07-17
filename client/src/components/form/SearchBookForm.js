@@ -37,7 +37,7 @@ export default class SearchBookForm extends Component {
   };
   onChange = (e,data) =>{
     this.setState({query:data.value});
-    console.log(data.value)
+    console.log(data)
     this.props.onBookSelect(this.state.books[data.value])
   }
   render() {

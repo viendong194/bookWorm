@@ -7,7 +7,7 @@ router.get('/search',(req,res)=>{
         goodreadsId:3,
         title:'Build a real app by js',
         author:'Owel',
-        cover:[
+        covers:[
 
         ],
         pages:'198'
@@ -16,7 +16,7 @@ router.get('/search',(req,res)=>{
         goodreadsId:1,
         title:'How to learn Node',
         author:'Owel',
-        cover:[
+        covers:[
 
         ],
         pages:'198'

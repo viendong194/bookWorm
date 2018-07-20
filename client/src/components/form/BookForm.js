@@ -13,6 +13,18 @@ export default class BookForm extends Component {
 		loading: false,
 		errors: {}
 	};
+	componentWillReceiveProps(nextprops) {
+		if (this.props.data !== nextprops)
+			this.setState({
+				data: {
+					goodreadsId: nextprops.book.goodreadsId,
+					title: nextprops.book.title,
+					author: nextprops.book.author,
+					pages: nextprops.book.pages,
+					cover: nextprops.book.covers[0]
+				}
+			});
+	}
 	/**
 	 * onChange
 	 */

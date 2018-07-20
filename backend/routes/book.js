@@ -17,7 +17,6 @@ router.get('/search',(req,res)=>{
         title:'How to learn Node',
         author:'Owel',
         covers:[
-
         ],
         pages:'198'
       }

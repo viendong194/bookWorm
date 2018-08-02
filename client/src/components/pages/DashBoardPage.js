@@ -2,17 +2,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ConfirmEmailMessage from '../message/ConfirmEmailMessage';
 // import { allBooksSelector } from '../../reducers/book';
-// import AddBookCta from '../cta/AddBookCta';
-import AddImageForm from '../form/AddImageForm';
-
+import {Button} from 'semantic-ui-react';
+import {Link} from 'react-router-dom';
+import AddImageForm from '../form/NewImageForm';
+import PersonalGallery from '../gallery/PersonalGallery';
 class DashBoardPage extends Component {
 	render() {
-		// const { books } = this.props;
 		return (
 			<div>
-				{this.props.isConfirmed && <ConfirmEmailMessage />}
-				<AddImageForm />
-				{/* {books.length === 0 && <AddBookCta />} */}
+				{!this.props.isConfirmed && <ConfirmEmailMessage />}
+				<Button as={Link} to='/imageform'>ADD YOUR NEW IMAGE</Button>
+				<PersonalGallery/>
 			</div>
 		);
 	}

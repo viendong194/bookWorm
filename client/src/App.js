@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import HomePage from './components/pages/HomePage';
 import LoginPage from './components/pages/LoginPage';
 import DashBoardPage from './components/pages/DashBoardPage';
-import NewBookPage from './components/pages/NewBookPage';
+import ImagePage from './components/pages/ImagePage';
 import SignUpPage from './components/pages/SignUpPage';
 import ConfirmationPage from './components/pages/ConfirmationPage';
 import ForgotPasswordPage from './components/pages/ForgotPasswordPage';
@@ -65,8 +65,8 @@ class App extends Component {
           <UserRoute
             location={this.props.location}
             exact
-            path="/book/new"
-            component={NewBookPage}
+            path="/imageform/:id?"
+            component={ImagePage}
           />
         </Switch>
       </Container>

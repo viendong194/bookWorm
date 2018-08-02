@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Form } from 'semantic-ui-react';
-import { postImage } from '../../image_actions';
+import { Form, Image } from 'semantic-ui-react';
+import { updateImage } from '../../image_actions';
 import { connect } from 'react-redux';
-class AddImageForm extends Component {
+class EditImageForm extends Component {
 	state = {
 		title: this.props.image ? this.props.image.title : '',
 		description: this.props.image ? this.props.image.description : '',
@@ -11,6 +11,7 @@ class AddImageForm extends Component {
 		loading: false,
 		done: false
 	};
+
 	/**
 	 * handle input value
 	 */
@@ -35,16 +36,16 @@ class AddImageForm extends Component {
 		if (this.state.title === '') error.title = 'title can not be empty';
 		if (this.state.description === '')
 			error.description = 'description can not be empty';
-		if (this.state.src === '') error.src = 'src can not be empty';
 		this.setState({ error });
 
 		let validate = Object.keys(error).length === 0;
 		if (validate) {
 			const { title, description, src } = this.state;
+			const author = this.props.author;
 			this.setState({ loading: true });
-			this.props.postImage({ title, description, src }).then(
+			this.props.updateImage({ title, description, src, author }).then(
 				() => {
-					this.setState({ done: true });
+					this.setState({ done: true, loading: false });
 				},
 				(err) =>
 					err.response.json().then(({ error }) => {
@@ -55,6 +56,7 @@ class AddImageForm extends Component {
 		}
 	};
 	render() {
+		// console.log(this.props)
 		return (
 			<Form
 				onSubmit={this.handleSubmit}
@@ -71,6 +73,7 @@ class AddImageForm extends Component {
 					name="title"
 					error={this.state.error.title && true}
 				/>
+				{this.props.image && <Image src={this.props.image.url} />}
 				<Form.Input
 					label="Picture"
 					type="file"
@@ -96,8 +99,12 @@ class AddImageForm extends Component {
 		);
 	}
 }
-
+function mapPropsToState(state) {
+	return {
+		author: state.user.email
+	};
+}
 export default connect(
-	null,
-	{ postImage }
-)(AddImageForm);
+	mapPropsToState,
+	{ updateImage }
+)(EditImageForm);

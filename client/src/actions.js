@@ -7,7 +7,7 @@ export const userLoggedOut = () => ({ type: USER_LOGGED_OUT });
  * @param {*} credentials
  */
 export const login = (credentials) => (dispatch) =>
-  fetch('/api/auth', {
+  fetch('http://localhost:8080/api/auth', {
     method: 'post',
     body: JSON.stringify({ credentials }),
     headers: {
@@ -28,7 +28,7 @@ export const login = (credentials) => (dispatch) =>
  * @param {*} credentials
  */
 export const signup = (user) => (dispatch) =>
-  fetch('/api/users', {
+  fetch('http://localhost:8080/api/users', {
     method: 'post',
     body: JSON.stringify({ user }),
     headers: {
@@ -49,7 +49,7 @@ export const signup = (user) => (dispatch) =>
  * @param {*} credentials
  */
 export const resetPasswordRequest = (email) => (dispatch) =>
-  fetch('/api/auth/reset_password_request', {
+  fetch('http://localhost:8080/api/auth/reset_password_request', {
     method: 'post',
     body: JSON.stringify({ email }),
     headers: {
@@ -67,7 +67,7 @@ export const resetPasswordRequest = (email) => (dispatch) =>
     });
 
 export const validateToken = (token) => () =>
-  fetch('/api/auth/validate_token', {
+  fetch('http://localhost:8080/api/auth/validate_token', {
     method: 'post',
     body: JSON.stringify({ token }),
     headers: {
@@ -84,7 +84,7 @@ export const validateToken = (token) => () =>
       }
     });
 export const resetPassword = (data) => () =>
-  fetch('/api/auth/reset_password', {
+  fetch('http://localhost:8080/api/auth/reset_password', {
     method: 'post',
     body: JSON.stringify({ data }),
     headers: {
@@ -103,7 +103,7 @@ export const resetPassword = (data) => () =>
       }
     });
 export const confirm = (token) => (dispatch) =>
-  fetch('/api/auth/confirm', {
+  fetch('http://localhost:8080/api/auth/confirm', {
     method: 'post',
     body: JSON.stringify({ token }),
     headers: {

@@ -5,9 +5,9 @@ import { logout } from '../../actions';
 import { getImages } from '../../image_actions';
 import Gallery from '../gallery/Gallery';
 class HomePage extends Component {
-	componentDidMount() {
-		this.props.getImages();
-	}
+	// componentDidMount() {
+	// 	this.props.getImages();
+	// }
 	render() {
 		return (
 			<div>

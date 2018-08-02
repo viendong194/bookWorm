@@ -9,6 +9,7 @@ import image from './routes/image';
 import bodyParser from 'body-parser';
 import Promise from 'bluebird';
 import cloudinary from 'cloudinary';
+import cors from 'cors';
 dotenv.config();
 const app = express();
 app.use(bodyParser.json());
@@ -22,7 +23,7 @@ mongoose.connect(
 	process.env.dbURL,
 	{ useMongoClient: true }
 );
-
+app.use(cors());
 app.use('/api/auth', auth);
 app.use('/api/users', users);
 app.use('/api/book', book);
